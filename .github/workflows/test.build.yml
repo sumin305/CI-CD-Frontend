@@ -1,0 +1,28 @@
+# main 브랜치에 push를 하면
+# 테스트 -> 빌드
+name: Run Test And Build
+
+# push, workflow_dispatch(manually trigger)
+# push 이벤트 대해서만 트리거 됨
+# 이벤트 하나 이상 설정 가능 (배열로 설정)
+on: [push, workflow_dispatch]
+jobs: # job은 각각 고유의 환경에서 실행됨 (고유의 환경을 지정해줘야된다)
+  # 1. test job
+  test:
+    runs-on: ubuntu-latest
+
+  # 2. build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 코드를 가져옴
+      - name: Get Codes
+        uses: actions/checkout@v4
+
+      # 의존성 파일들 설치
+      - name: Install Dependencies
+        run: npm install
+
+      # 테스트 실행
+      - name: Run Test
+        run: npm run test
