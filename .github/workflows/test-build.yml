@@ -10,12 +10,7 @@ jobs: # job은 각각 고유의 환경에서 실행됨 (고유의 환경을 지�
   # 1. test job
   test:
     runs-on: ubuntu-latest
-
-  # 2. build job
-  build:
-    runs-on: ubuntu-latest
     steps:
-      # 코드를 가져옴
       - name: Get Codes
         uses: actions/checkout@v4
 
@@ -26,3 +21,5 @@ jobs: # job은 각각 고유의 환경에서 실행됨 (고유의 환경을 지�
       # 테스트 실행
       - name: Run Test
         run: npm run test
+
+  # 2. build job
