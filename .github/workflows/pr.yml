@@ -1,0 +1,42 @@
+# name: PR
+# on: pull_request
+# jobs:
+#   build-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get Codes
+#         uses: actions/checkout@v4
+#       - name: Install Deps
+#         run: npm install
+#       - name: build
+#         run: npm run build
+#       - name: test
+#         run: npm run test
+
+# 버전별 테스트 하는 방법
+name: PR
+on: push
+jobs:
+  build-test:
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Codes
+        uses: actions/checkout@v4
+
+      # node.js 를 설치
+      - name: Install Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Deps
+        run: npm install
+
+      - name: build
+        run: npm run build
+
+      - name: test
+        run: npm run test

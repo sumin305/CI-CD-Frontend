@@ -5,7 +5,16 @@ name: Run Test And Build
 # push, workflow_dispatch(manually trigger)
 # push 이벤트 대해서만 트리거 됨
 # 이벤트 하나 이상 설정 가능 (배열로 설정)
-on: [push, workflow_dispatch]
+on:
+  # Trigger Event
+  push:
+    # Event Filtering
+    branches:
+      - dev
+      - "feat/**"
+
+  workflow_dispatch:
+
 jobs: # job은 각각 고유의 환경에서 실행됨 (고유의 환경을 지정해줘야된다)
   # 1. test job
   test:
