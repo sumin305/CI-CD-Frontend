@@ -23,3 +23,12 @@ jobs: # job은 각각 고유의 환경에서 실행됨 (고유의 환경을 지�
         run: npm run test
 
   # 2. build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Codes
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Build
+        run: npm run build
